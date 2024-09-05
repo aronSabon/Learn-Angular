@@ -1,0 +1,8 @@
+<div>
+<input type="text" #inputtext (focus)="0">
+  <button (click)="assignText(inputtext)">lsdkjf</button>
+  <app-demo [message]="inputBalVal" *ngIf="!onDestroy">
+    <h2 #projectedContent>user has entered:{{inputBalVal}}</h2>
+  </app-demo>
+  <button (click)="destroy()">Destroy</button>
+</div>

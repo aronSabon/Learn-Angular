@@ -1,0 +1,20 @@
+h2{
+    margin: 20px 50px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: black;
+}
+.app-container{
+    margin: 20px 50 px;
+    padding: 10px 20px;
+
+
+}
+.appHighlight{
+    border: black 3px solid;
+    background-color: gold;
+
+}
+.appFont{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
+}

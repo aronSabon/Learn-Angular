@@ -1,0 +1,21 @@
+<p>home works!</p>
+<button (click)="NavigateToCourses()"> Go to Courses</button>
+<br>
+<input type="text" [(ngModel)]="searchText" #searchVar>
+<!-- <button (click)="OnSearchClicked(searchVar.value)">Search</button> -->
+<button [routerLink]="'/Courses'" [queryParams]="{search:searchText}">Search</button>
+<section id="search">
+    <app-search></app-search>
+</section>
+<section id="popular">
+    <app-popular></app-popular>
+</section>
+<section id="testimony">
+    <app-testimony></app-testimony>
+</section>
+<section id="services">
+    <app-services></app-services>
+</section>
+<section id="contact">
+    <app-contact></app-contact>
+</section>

@@ -1,0 +1,15 @@
+<h2>Custom Class and Style Directiveee</h2>
+<!-- [ngClass]=" {appHighlight:true,'app-container':true,appFont:false }" -->
+<div  [appClass]="{appHighlight:true,'app-container':true,appFont:false }">
+  <p>
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae porro non placeat sed veniam ex iure neque facilis eius magnam! Ipsam sequi nobis blanditiis nam amet harum, reiciendis mollitia fuga.
+  </p>
+</div>
+
+<!--  -->
+<!-- [ngStyle]="{backgroundColor:active ? 'green':'red',color:active? 'blue':'green'}" -->
+<div class="app-container"  [appStyle]="{backgroundColor:active? 'orange':'white',color:active?'gray':'blue'}" >
+  <p>
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae porro non placeat sed veniam ex iure neque facilis eius magnam! Ipsam sequi nobis blanditiis nam amet harum, reiciendis mollitia fuga.
+  </p>
+</div>

@@ -1,0 +1,19 @@
+<!-- <app-home></app-home>
+<app-users></app-users> -->
+
+<div class="main-container">
+  <div class="header">
+    <a href="#" (click)="homeClicked()">Home</a>
+    <a href="#" (click)="usersClicked()">Users</a>
+
+  </div>
+  <!-- <ng-template></ng-template> -->
+  <div [ngSwitch]="case">
+    <div *ngSwitchDefault>
+      <app-home></app-home>
+    </div>
+    <div *ngSwitchCase="'users'">
+      <app-users></app-users>
+    </div>
+  </div>
+</div>

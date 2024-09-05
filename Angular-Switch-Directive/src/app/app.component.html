@@ -1,0 +1,44 @@
+<div class="notice-container">
+  <div class="notice-header">
+    <button (click)="infoClick()">info</button>
+    <button (click)="termsClick()">services</button>
+    <button (click)="policyClick()">privacy</button>
+    <button (click)="aggrementClick()">user aggrement</button>
+  </div>
+
+  <div class="notice-body" [ngSwitch]="case">
+    <!-- default services and aggrement page -->
+    <div *ngSwitchDefault>
+      <h2>
+        terms of services and privacy policy
+      </h2>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias eum similique eveniet est, aut error quibusdam, impedit cum fugit nostrum tempore commodi laboriosam, incidunt perferendis recusandae consequuntur velit accusantium minus.</p>
+    </div>
+    
+     <!-- terms of services page -->
+     <div *ngSwitchCase="'terms'">
+      <h2>
+        terms of services
+      </h2>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias eum similique eveniet est, aut error quibusdam, impedit cum fugit nostrum tempore commodi labori</p>
+    </div>
+
+     <!-- privacy policy -->
+     <div *ngSwitchCase="'policy'">
+      <h2>
+       privacy policy
+      </h2>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias eum similique eveniet est, aut error quibusdam, impedit cum fugit nostrum tempore commodi labori</p>
+    </div>
+
+
+     <!-- user aggrements page -->
+     <div *ngSwitchCase="'aggrement'">
+      <h2>
+          user aggrement      </h2>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias eum similique eveniet est, aut error quibusdam, impedit cum fugit nostrum tempore commodi labori</p>
+    </div>
+  
+  </div>
+
+</div>

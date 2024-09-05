@@ -1,0 +1,30 @@
+h1{
+    padding: 30px;
+}
+.div-container{
+    background-color: gray;
+    margin: 0px 30px;
+    padding: 30px;
+    display: flex;
+}
+.sub-container{
+    background-color: rgb(205, 201, 201);
+    padding: 10px 20px;
+    width: 200px;
+    
+
+}
+.sub-container h2{
+    padding: 0;
+    margin: 0;
+}
+.data-list{
+    background-color: white;
+    margin: 3px 0;
+    height: 30px;
+}
+button{
+    padding: 6px 12px;
+    margin: 3px;
+    background-color: rgb(85, 85, 175);
+}

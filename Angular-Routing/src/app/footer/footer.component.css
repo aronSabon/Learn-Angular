@@ -1,0 +1,25 @@
+.container{
+    background-color: hsla(0, 0%, 0%, 0.725);
+    padding: 30px;
+}
+.main{
+    display: flex;
+    padding: 20px 0;
+    gap: 30px;
+}
+.about{
+    width: 60%;
+}
+.categories{
+
+    width: 30%;
+}
+.quickLinks{
+    width: 30%;
+}
+li{
+    list-style: none;
+}
+.bottom{
+    padding: 20px 0 0;
+}

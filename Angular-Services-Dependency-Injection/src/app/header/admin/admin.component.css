@@ -1,0 +1,11 @@
+
+.admin-Container{
+    background-color: rebeccapurple;
+}
+.admin-add-user{
+background-color: aqua;
+width: 600px;
+margin: auto;
+display: flexbox;
+
+}

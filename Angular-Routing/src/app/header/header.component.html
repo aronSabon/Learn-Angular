@@ -1,0 +1,35 @@
+<div class="subHeader">
+    <a  routerLink="Home" fragment="search">Search</a>
+    <a  routerLink="Home" fragment="popular">Popular</a>
+    <a  routerLink="Home" fragment="testimony">Testimony</a>
+    <a  routerLink="Home" fragment="services">Services</a>
+    <a  routerLink="Home" fragment="contact">Contact</a>
+
+</div>
+
+<div class="header">
+    <div class="logo">
+        <h2>Logo</h2>
+    </div>
+    <div class="mainLinks">
+        <a routerLink="Home" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Home</a>
+        <a [routerLink]="'About'" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">About</a>
+        <a routerLink="Contact"routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Contact</a>
+        <a routerLink="Courses"routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Courses</a>
+    </div>
+    <div class="sideLinks">
+        <a routerLink="Login">Login</a>
+        <a routerLink="Login" [queryParams]="{logout:true}">Logout</a>
+    </div>
+</div> 
+
+<!-- relative path 
+ if you us../ bfore router link then the link will move two level up
+ and append after removing last two path form current url
+ if you use / before router link then the link will append to
+ root url
+ 
+ if you dont use / bofore routre link thne the link will append to 
+ current url
+ 
+ -->

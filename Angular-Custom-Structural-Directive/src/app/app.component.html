@@ -1,0 +1,24 @@
+<div class="notice-container">
+  <div class="notice-header">
+    <button (click)="showTerms()">+</button>
+    <div class="notice-info">
+      <p>read terms of servies and privacy policy</p>
+    </div>
+
+  </div>
+  <!-- <ng-template [ngIf]="display" [ngIfElse]="myTemplate"> -->
+  <div class="notice-body" *appIf ="display">
+    <h1>Terms of services and privacy policy</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et fuga deserunt ipsam, assumenda, suscipit dignissimos ipsum cumque provident eligendi aliquam tempora numquam porro consequatur, ratione quod sit? Facere repellat iure dolores praesentium fugiat deleniti, quis hic consequuntur nobis nulla sint sapiente cupiditate ducimus ipsam minima odit distinctio repellendus magnam! Praesentium.</p>
+    <h2>Terms of services</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et fuga deserunt ipsam, assumenda, suscipit dignissimos ipsum cumque provident eligendi aliquam tempora numquam porro consequatur, ratione quod sit? Facere repellat iure dolores praesentium fugiat deleniti, quis hic consequuntur nobis nulla sint sapiente cupiditate ducimus ipsam minima odit distinctio repellendus magnam! Praesentium.</p>
+    <h2>Privacy policy</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et fuga deserunt ipsam, assumenda, suscipit dignissimos ipsum cumque provident eligendi aliquam tempora numquam porro consequatur, ratione quod sit? Facere repellat iure dolores praesentium fugiat deleniti, quis hic consequuntur nobis nulla sint sapiente cupiditate ducimus ipsam minima odit distinctio repellendus magnam! Praesentium.</p>
+  </div>
+<!-- </ng-template> -->
+  <ng-template #myTemplate>
+    <div>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et fuga deserunt ipsam, assumenda, suscipit dignissimos ipsum cumque provident eligendi aliquam tempora numquam porro consequatur, ratione quod sit? Facere repellat iure dolores praesentium fugiat deleniti, quis hic consequuntur nobis nulla sint sapiente cupiditate ducimus ipsam minima odit distinctio repellendus magnam! Praesentium.</p>
+    </div>
+  </ng-template>
+</div>

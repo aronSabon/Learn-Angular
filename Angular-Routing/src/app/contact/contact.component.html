@@ -1,0 +1,14 @@
+<div class="contact">
+    <form action="">
+    <label for="firstName">First Name</label><br>
+    <input type="text" id="firstName" [(ngModel)]="firstName" name="firstName"><br>
+    <label for="lastName">LastName</label><br>
+    <input type="text" id="lastName" [(ngModel)]="lastName" name="lastName"><br>
+    <label for="country">Country</label><br>
+    <input type="text" id="country" [(ngModel)]="country" name="country"><br>
+    <label for="subject">Subject</label><br>
+    <textarea name="" id="subject" cols="30" rows="10"  [(ngModel)]="subject" name="subject"></textarea><br>
+
+    <button (click)="OnSubmitClicked()">Submit</button>
+</form>
+</div>

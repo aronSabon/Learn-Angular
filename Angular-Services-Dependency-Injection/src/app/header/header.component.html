@@ -1,0 +1,16 @@
+<div class="header">
+    <div class="logo">
+        <h1>MySite</h1>
+    </div>
+    <div class="lists">
+       <a href="" (click)="HomeClicked()">Home</a>
+       <a href="" (click)="AdminClicked()">Admin</a>
+    </div>
+    <div>
+        <button  (click)="OnSubscribe()">Subscribe</button>
+    </div>
+</div>
+<div [ngSwitch]="selectedTab">
+    <app-home *ngSwitchCase="'home'"></app-home>
+    <app-admin *ngSwitchCase="'admin'"></app-admin>
+</div>

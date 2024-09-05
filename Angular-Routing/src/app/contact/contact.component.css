@@ -1,0 +1,17 @@
+.contact{
+    padding: 50px;
+   
+    text-align: center;
+}
+button{
+    padding: 5px 10px;
+    color: beige;
+    background-color: blueviolet;
+    border: none;
+    margin: 10px;
+}
+input{
+    height: 30px;
+    width: 300px;
+    margin: 10px;
+}

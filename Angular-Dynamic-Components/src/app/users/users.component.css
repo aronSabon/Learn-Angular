@@ -1,0 +1,79 @@
+.container{
+    padding: 30px 60px;
+}
+table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+    padding: 3px;
+    color: white;
+
+}
+th{
+    background-color: rgb(70, 68, 68);
+
+}
+td{
+    background-color: rgb(94, 92, 92);
+
+}
+
+table {
+    width: 100%;
+    border: 1px solid blue;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+/* 
+table {
+    width: 500px;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+@media screen and (max-width: 600px) {
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+    }
+
+    td {
+        border: none;
+        position: relative;
+        padding-left: 10%;
+    }
+
+    td:before {
+        position: absolute;
+        left: 6px;
+        content: attr(data-label);
+        font-weight: bold;
+    }
+} */
+
+
+
