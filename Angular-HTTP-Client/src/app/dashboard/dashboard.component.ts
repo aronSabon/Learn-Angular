@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   taskService: TaskService = inject(TaskService);
   editMode:boolean=false;
   selectedTask:Task;
+  selectedTaskId:string='';
 
   ngOnInit(): void {
     this.fetchAllTaskData();
@@ -40,9 +41,15 @@ export class DashboardComponent implements OnInit {
   FetchAllTasks() {
     this.fetchAllTaskData();
   }
-  CreateTask(data: Task) {
+  CreateTaskOrUpdateTask(data: Task) {
+    if(this.editMode){
+      //update task
+      this.taskService.UpdateTask(this.selectedTaskId,data);
+    }
+    else{
     this.taskService.CreateTask(data);
     // this.fetchAllTaskData();
+    }
   }
   private fetchAllTaskData() {
     this.taskService.FetchAllTaskData().subscribe((tasks) => {
@@ -58,6 +65,7 @@ export class DashboardComponent implements OnInit {
     // this.fetchAllTaskData();
   }
   EditTask(id:string | undefined){
+    this.selectedTaskId=id;
     this.showCreateTaskForm= true;
     this.editMode=true;
     this.selectedTask = this.allTasks.find((task) => {
