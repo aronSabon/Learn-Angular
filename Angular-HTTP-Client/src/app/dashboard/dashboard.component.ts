@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   allTasks: Task[] = [];
   taskService: TaskService = inject(TaskService);
   editMode:boolean=false;
+  selectedTask:Task;
 
   ngOnInit(): void {
     this.fetchAllTaskData();
@@ -23,6 +24,14 @@ export class DashboardComponent implements OnInit {
   OpenCreateTaskForm() {
     this.showCreateTaskForm = true;
     this.editMode=false;
+    this.selectedTask={
+      title:'',
+      description:'',
+      assignedTo:'',
+      createdAt:'',
+      priority:'',
+      status:''
+  }
   }
 
   CloseCreateTaskForm() {
@@ -51,5 +60,8 @@ export class DashboardComponent implements OnInit {
   EditTask(id:string | undefined){
     this.showCreateTaskForm= true;
     this.editMode=true;
+    this.selectedTask = this.allTasks.find((task) => {
+      return task.id===id;
+    });
   }
 }
