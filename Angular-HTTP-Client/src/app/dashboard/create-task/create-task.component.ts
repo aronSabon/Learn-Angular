@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Task } from '../../Models/Task';
 
@@ -12,6 +12,9 @@ export class CreateTaskComponent {
   CloseForm: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output()
   EmitTaskData: EventEmitter<Task> = new EventEmitter<Task>();
+  @Input()
+  editMode:boolean=false;
+
 
   OnCloseForm(){
     this.CloseForm.emit(false);  

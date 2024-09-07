@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   // http: HttpClient = inject(HttpClient);
   allTasks: Task[] = [];
   taskService: TaskService = inject(TaskService);
+  editMode:boolean=false;
 
   ngOnInit(): void {
     this.fetchAllTaskData();
@@ -21,6 +22,7 @@ export class DashboardComponent implements OnInit {
 
   OpenCreateTaskForm() {
     this.showCreateTaskForm = true;
+    this.editMode=false;
   }
 
   CloseCreateTaskForm() {
@@ -48,5 +50,6 @@ export class DashboardComponent implements OnInit {
   }
   EditTask(id:string | undefined){
     this.showCreateTaskForm= true;
+    this.editMode=true;
   }
 }
