@@ -35,7 +35,7 @@
                     <button class="task-action-btn" title="Detail">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
                     </button>
-                    <button class="task-action-btn" title="Edit">
+                    <button (click)="EditTask(task.id)" class="task-action-btn" title="Edit">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     </button>
                     <button (click)="DeleteTask(task.id)" class="task-action-btn" title="Delete">
