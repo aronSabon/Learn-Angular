@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Task } from "../Models/Task";
-import { map } from "rxjs";
+import { map, Subject } from "rxjs";
 
 @Injectable(
     {
@@ -10,6 +10,7 @@ import { map } from "rxjs";
 )
 export class TaskService{
     http:HttpClient = inject(HttpClient);
+    errorSubject = new Subject<HttpErrorResponse>();
 
 
     CreateTask(task : Task){
@@ -19,25 +20,24 @@ export class TaskService{
           'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json',
           task,
           {headers : headers})
-          .subscribe((response) => {
-            console.log(response);
-            // this.fetchAllTaskData();
-          });
+          .subscribe({error: (err) => {
+            this.errorSubject.next(err);
+          }});
     }
     DeleteTask(id:string | undefined){
         this.http.delete(
-            'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks/'+id+'.json').subscribe((response) => {
-              console.log(response);
-            //   this.fetchAllTaskData();
-            });
+            'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks/'+id+'.json')
+            .subscribe({error: (err) => {
+              this.errorSubject.next(err);
+            }});
     }
     DeleteAllTasks(){
         this.http.delete(
-            'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json').subscribe((response) => {
-              console.log(response);
-            //   this.fetchAllTaskData();
-            });
-    }
+            'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json')
+            .subscribe({error: (err) => {
+              this.errorSubject.next(err);
+            }});
+    }      
     GetAllTaskData(){
         return this.http.get<{[key:string]: Task}>(
             'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json'
@@ -54,6 +54,8 @@ export class TaskService{
     }
     UpdateTask(id:string | undefined,data:Task){
       this.http.put('https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks/'+id+'.json',
-        data).subscribe();
+        data).subscribe({error: (err) => {
+          this.errorSubject.next(err);
+        }});
     }
 }
