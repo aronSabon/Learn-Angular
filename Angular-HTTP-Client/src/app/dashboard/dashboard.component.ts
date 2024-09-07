@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   http: HttpClient = inject(HttpClient);
   allTasks: Task[] = [];
   ngOnInit(): void {
-    this.fetchTaskData();
+    this.fetchAllTaskData();
   }
 
   OpenCreateTaskForm(){
@@ -22,6 +22,9 @@ export class DashboardComponent implements OnInit {
 
   CloseCreateTaskForm(){
     this.showCreateTaskForm = false;
+  }
+  FetchAllTasks(){
+    this.fetchAllTaskData();
   }
   CreateTask(data : Task){
     const headers = new HttpHeaders({'myheader': 'hello-world'});
@@ -32,15 +35,15 @@ export class DashboardComponent implements OnInit {
       {headers : headers})
       .subscribe((response) => {
         console.log(response);
+        this.fetchAllTaskData();
       });
   }
-  private fetchTaskData(){
+  private fetchAllTaskData(){
     this.http.get<{[key:string]: Task}>(
       'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json'
     ).pipe(map((response) => {
       //transform Data
       let tasks = [];
-
       for(let key in response){
         if(response.hasOwnProperty(key)){
         tasks.push({...response[key], id:key});
@@ -52,6 +55,23 @@ export class DashboardComponent implements OnInit {
       this.allTasks=tasks;
       console.log(tasks);
     })
+  }
+  DeleteTask(id:string | undefined){
+    this.http.delete(
+      'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks/'+id+'.json').subscribe((response) => {
+        console.log(response);
+        this.fetchAllTaskData();
+
+      });
+  }
+  DeleteAllTasks(){
+    this.http.delete(
+      'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json').subscribe((response) => {
+        console.log(response);
+        this.fetchAllTaskData();
+
+      });
+
   }
 
 }
