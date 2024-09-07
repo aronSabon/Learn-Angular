@@ -21,11 +21,14 @@
     <hr>
 
     <div class="dashboard-item-container">
-        <div style="text-align: center;" *ngIf="allTasks.length<1">
-        <h2>
-            NO Tasks has been created yet
-        </h2>
-        </div>
+        <div class="loader" *ngIf="isLoading"></div>
+       
+        <ng-container *ngIf="!isLoading">
+            <div style="text-align: center;" *ngIf="allTasks.length<1">
+                <h2>
+                    NO Tasks has been created yet
+                </h2>
+                </div>
             <div class="task-item" [ngClass]="'task-'+ task.status" *ngFor="let task of allTasks">
                 <div class="task-title">
                     <h3>{{task.title}}</h3>
@@ -45,5 +48,7 @@
                     </button>
                 </div>
             </div>
+        </ng-container>
+          
     </div>
 </div>
