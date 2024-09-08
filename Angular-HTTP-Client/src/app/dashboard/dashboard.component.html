@@ -5,6 +5,13 @@
         [editMode]="editMode"
         [selectedTask]="selectedTask"
 ></app-create-task>
+<app-task-details 
+    *ngIf="showTaskDetails"
+    (CloseTaskDetails)="CloseTaskDetails($event)"
+    [taskDetail]="currentTask">
+    
+
+</app-task-details>
 
 <div class="dashboard-container">
     <div style="display: flex;">
@@ -38,7 +45,7 @@
                 <p><b>Priority: </b>{{task.priority}}</p>
                 <p><b>Status: </b>{{task.status}}</p>
                 <div class="task-action-icons">
-                    <button class="task-action-btn" title="Detail">
+                    <button (click)="OpenTaskDetails(task.id)" class="task-action-btn" title="Detail">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
                     </button>
                     <button (click)="EditTask(task.id)" class="task-action-btn" title="Edit">

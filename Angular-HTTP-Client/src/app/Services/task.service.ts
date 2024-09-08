@@ -19,7 +19,7 @@ export class TaskService{
         const headers = new HttpHeaders({'myheader': 'hello-world'});
         // console.log(data)
         this.http.post<{name: string}>(
-          'https://angukklarhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json',
+          'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json',
           task,
           {headers : headers})
           .pipe( catchError((err) => {
@@ -85,5 +85,15 @@ export class TaskService{
         .subscribe({error: (err) => {
           this.errorSubject.next(err);
         }});
+    }
+    GetTaskById(id:string){
+      return this.http.get(
+        'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks/'+id+'.json'
+      ).pipe(map((response) =>{
+        console.log(response);
+        let task = {};
+        task = {...response, id:id}
+        return task;
+      }))
     }
 }

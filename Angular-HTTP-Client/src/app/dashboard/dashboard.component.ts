@@ -11,6 +11,7 @@ import { TaskService } from '../Services/task.service';
 })
 export class DashboardComponent implements OnInit,OnDestroy {
   showCreateTaskForm: boolean = false;
+  showTaskDetails: boolean = false;
   // http: HttpClient = inject(HttpClient);
   allTasks: Task[] = [];
   taskService: TaskService = inject(TaskService);
@@ -18,6 +19,7 @@ export class DashboardComponent implements OnInit,OnDestroy {
   selectedTask: Task;
   selectedTaskId: string = '';
   isLoading: boolean = false;
+  currentTask:Task;
 
   errorMessage: string | null = null;
   errorSubscription : Subscription;
@@ -102,5 +104,15 @@ export class DashboardComponent implements OnInit,OnDestroy {
     this.selectedTask = this.allTasks.find((task) => {
       return task.id === id;
     });
+  }
+  OpenTaskDetails(id:string){
+    this.showTaskDetails=true;
+    this.taskService.GetTaskById(id).subscribe((data:Task) =>{
+      this.currentTask=data;
+    })
+
+  }
+  CloseTaskDetails(swit:boolean){
+    this.showTaskDetails=swit;
   }
 }
