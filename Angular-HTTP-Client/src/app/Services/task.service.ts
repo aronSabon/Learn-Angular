@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Task } from "../Models/Task";
-import { map, Subject } from "rxjs";
+import { catchError, map, Subject, throwError } from "rxjs";
+import { LoggingService } from "./Logging.service";
 
 @Injectable(
     {
@@ -11,15 +12,21 @@ import { map, Subject } from "rxjs";
 export class TaskService{
     http:HttpClient = inject(HttpClient);
     errorSubject = new Subject<HttpErrorResponse>();
+    loggingService:LoggingService= inject(LoggingService);
 
 
     CreateTask(task : Task){
         const headers = new HttpHeaders({'myheader': 'hello-world'});
         // console.log(data)
         this.http.post<{name: string}>(
-          'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json',
+          'https://angukklarhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json',
           task,
           {headers : headers})
+          .pipe( catchError((err) => {
+            const errObj={statusCode:err.status, errorMessage:err.message, dateTime:new Date};
+            this.loggingService.logError(errObj);
+            return throwError(() => err);
+          }))
           .subscribe({error: (err) => {
             this.errorSubject.next(err);
           }});
@@ -27,6 +34,11 @@ export class TaskService{
     DeleteTask(id:string | undefined){
         this.http.delete(
             'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks/'+id+'.json')
+            .pipe( catchError((err) => {
+              const errObj={statusCode:err.status, errorMessage:err.message, dateTime:new Date};
+              this.loggingService.logError(errObj);
+              return throwError(() => err);
+            }))
             .subscribe({error: (err) => {
               this.errorSubject.next(err);
             }});
@@ -34,6 +46,11 @@ export class TaskService{
     DeleteAllTasks(){
         this.http.delete(
             'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json')
+            .pipe( catchError((err) => {
+              const errObj={statusCode:err.status, errorMessage:err.message, dateTime:new Date};
+              this.loggingService.logError(errObj);
+              return throwError(() => err);
+            }))
             .subscribe({error: (err) => {
               this.errorSubject.next(err);
             }});
@@ -50,11 +67,22 @@ export class TaskService{
               }
             }
             return tasks;
-          }));
+          }),
+        catchError((err) => {
+          const errObj={statusCode:err.status, errorMessage:err.message, dateTime:new Date};
+          this.loggingService.logError(errObj);
+          return throwError(() => err);
+        }));
     }
     UpdateTask(id:string | undefined,data:Task){
       this.http.put('https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks/'+id+'.json',
-        data).subscribe({error: (err) => {
+        data)
+        .pipe( catchError((err) => {
+          const errObj={statusCode:err.status, errorMessage:err.message, dateTime:new Date};
+          this.loggingService.logError(errObj);
+          return throwError(() => err);
+        }))
+        .subscribe({error: (err) => {
           this.errorSubject.next(err);
         }});
     }
