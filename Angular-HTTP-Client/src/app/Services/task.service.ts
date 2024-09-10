@@ -56,9 +56,12 @@ export class TaskService{
             }});
     }      
     GetAllTaskData(){
+      let headers = new HttpHeaders();
+      headers= headers.append('content-type','application/json'),
+      headers= headers.append('Access-Control-Allow-Origin','*')
         return this.http.get<{[key:string]: Task}>(
             'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json'
-          ).pipe(map((response) => {
+          ,{headers:headers}).pipe(map((response) => {
             //transform Data
             let tasks = [];
             for(let key in response){
