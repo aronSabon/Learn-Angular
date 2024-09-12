@@ -3,7 +3,8 @@ import { Observable, tap } from "rxjs";
 
 export class AuthInterceptorService implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        const modifyReq= req.clone({headers: req.headers.append('auth','lemonauth')});
+        const modifyReq= req.clone();
+        // {headers: req.headers.append('auth','lemonauth')}
         console.log('auth Interceptor called')
         return next.handle(modifyReq).pipe(tap((event) => {
             if(event.type===HttpEventType.Response ){

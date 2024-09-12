@@ -3,7 +3,7 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, withFetch } from '@angular/common/http';
 import { AuthInterceptorService } from './Services/auth.interceptor.service';
 import { LoggingInterceptorService } from './Services/logging-interceptor-service';
 import { LoginComponent } from './login/login.component';
