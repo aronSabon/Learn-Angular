@@ -1,8 +1,9 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpParams } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Task } from "../Models/Task";
-import { catchError, map, Subject, throwError } from "rxjs";
+import { catchError, map, Subject, tap, throwError } from "rxjs";
 import { LoggingService } from "./Logging.service";
+import { response } from "express";
 
 @Injectable(
     {
@@ -45,8 +46,19 @@ export class TaskService{
     }
     DeleteAllTasks(){
         this.http.delete(
-            'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json')
-            .pipe( catchError((err) => {
+            'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json',
+          {observe:'events'})
+            .pipe(tap((event)=>{
+              if(event.type=== HttpEventType.Sent){
+                alert('request Sent')
+                console.log('event type = ')
+              }
+              if(event.type=== HttpEventType.Response){
+                alert('response received')
+                console.log('event type = ')
+              }
+              console.log(event);
+            }), catchError((err) => {
               const errObj={statusCode:err.status, errorMessage:err.message, dateTime:new Date};
               this.loggingService.logError(errObj);
               return throwError(() => err);
@@ -62,11 +74,13 @@ export class TaskService{
       let queryParams = new HttpParams();
       queryParams= queryParams.set('page', 2);
       queryParams=queryParams.set('item',10);
+
         return this.http.get<{[key:string]: Task}>(
             'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json'
-          ,{headers:headers,params:queryParams}).pipe(map((response) => {
+          ,{headers:headers,params:queryParams, observe:'body'}).pipe(map((response) => {
             //transform Data
             let tasks = [];
+            console.log(response);
             for(let key in response){
               if(response.hasOwnProperty(key)){
               tasks.push({...response[key], id:key});
