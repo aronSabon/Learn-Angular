@@ -15,6 +15,8 @@ import { CreateTaskComponent } from './dashboard/create-task/create-task.compone
 import { TaskDetailsComponent } from './dashboard/task-details/task-details.component';
 import { FormsModule } from '@angular/forms';
 import { RouteModule } from './route.module';
+import { LoaderComponent } from './utils/loader/loader.component';
+import { SnackbarComponent } from './utils/snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { RouteModule } from './route.module';
     TaskDetailsComponent,
     HomeComponent,
     LoginComponent,
+    LoaderComponent,
+    SnackbarComponent,
 
   ],
   imports: [
