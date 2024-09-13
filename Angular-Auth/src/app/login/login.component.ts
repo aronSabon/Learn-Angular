@@ -3,6 +3,8 @@ import { Component, inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../Services/auth.service';
 import { error } from 'console';
+import { Observable } from 'rxjs';
+import { AuthResponse } from '../Models/AuthResponse';
 
 @Component({
   selector: 'app-login',
@@ -12,44 +14,45 @@ import { error } from 'console';
 export class LoginComponent {
   isLoginMode: boolean = true;
   authService: AuthService = inject(AuthService);
-  isLoading:boolean=false;
-  errorMessage:string | null = null;
+  isLoading: boolean = false;
+  errorMessage: string | null = null;
+  authObs: Observable<AuthResponse>;
 
   OnSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
   OnFormSubmitted(form: NgForm) {
-    this.isLoading=true;
+    this.isLoading = true;
 
     const email = form.value.email;
     const password = form.value.password;
-    // console.log(form);
-    // console.log(form.value);
+
     if (this.isLoginMode) {
-      return;
+      this.authObs = this.authService.login(email, password);
     }
     else {
-      this.authService.signup(email, password).subscribe({
-        next: (response) => {
-          console.log(response);
-          this.isLoading=false;
-        },
-         error: (errMsg) => {
-          console.log(errMsg);
-          // this.SetErrorMessage(err);
-          this.errorMessage=errMsg;
-          this.isLoading=false;
-       this.hideSnackbar();
-        }
-      })
+      this.authObs=this.authService.signup(email, password);
     }
-
     form.reset();
+    this.authObs.subscribe({
+      next: (response) => {
+        console.log(response);
+        this.isLoading = false;
+      },
+      error: (errMsg) => {
+        console.log(errMsg);
+        // this.SetErrorMessage(err);
+        this.errorMessage = errMsg;
+        this.isLoading = false;
+        this.hideSnackbar();
+      }
+    });
   }
-  hideSnackbar(){
+
+  hideSnackbar() {
     setTimeout(() => {
-      this.errorMessage=null;
-  }, 3000);
+      this.errorMessage = null;
+    }, 3000);
   }
   // SetErrorMessage(err:HttpErrorResponse){
   //   if(err.error.error="EMAIL_EXISTS"){
