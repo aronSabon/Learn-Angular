@@ -1,0 +1,52 @@
+
+<!-- ngClass="{{isLoginMode? 'app-login-form':'app-register-form'}}" -->
+<div class="app-login-form"  >
+    <app-snackbar [errorMessage]="errorMessage" *ngIf="errorMessage"></app-snackbar>
+    <h2>{{isLoginMode? 'Login' : 'Signup'}}</h2>
+    <app-loader *ngIf="isLoading"></app-loader>
+
+    <form *ngIf="!isLoading" #authForm="ngForm" (ngSubmit)="OnFormSubmitted(authForm)">
+        <!-- <div *ngIf="!isLoginMode">
+            <div class="form-input">
+                <label>First Name</label>
+                <input type="text" placeholder="First Name" name="firstName" ngModel required>
+            </div>
+            <div class="form-input">
+                <label>Last Name</label>
+                <input type="text" placeholder="Last Name" name="lastName" ngModel required>
+            </div>      
+        </div>   -->
+        <!-- <div  ngModelGroup="login" #loginn="ngModelGroup">
+            <div class="form-input">
+                <label>Email Address</label>
+                <input type="email" placeholder="Email address" name="email" ngModel required email>
+            </div>
+            <div class="form-input">
+                <label>Password</label>
+                <input type="password" placeholder="Password" name="password" ngModel required minlength="6">
+            </div> 
+        </div> -->
+        <div class="form-input">
+            <label>Email Address</label>
+            <input type="email" placeholder="Email address" name="email" ngModel required email>
+        </div>
+        <div class="form-input">
+            <label>Password</label>
+            <input type="password" placeholder="Password" name="password" ngModel required minlength="6">
+        </div> 
+        
+        <!-- [disabled]="(loginn.invalid && isLoginMode) || (!isLoginMode && authForm.invalid)"  -->
+
+        <button 
+        [disabled]="authForm.invalid"
+
+        type="submit" 
+        class="app-login-btn">{{isLoginMode? 'Login':'Register'}}</button>
+        <p>{{isLoginMode? 'Do not have an accout yet? ' :'Already have an account.'}}
+            <button 
+            (click)="OnSwitchMode()" 
+            type="button" 
+            class="app-toggle-btn">{{isLoginMode? 'Register' : 'Login'}} Here.</button>
+        </p>
+    </form>
+</div>
