@@ -12,75 +12,68 @@ import { Router } from "@angular/router";
 export class AuthService {
     http: HttpClient = inject(HttpClient);
     user = new BehaviorSubject<User>(null);
-    router :Router = inject(Router);
-    
+    router: Router = inject(Router);
+    private tokenExpireTimer:any;
+
 
     signup(email, password) {
         const data = { email: email, password: password, returnSecureToken: true }
         return this.http.post<AuthResponse>
-        (
-            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD_eEJpTYpTtjLzRX9b0eADeDcg3wLSKsM',
-            data
-        ).pipe(catchError(this.handleError),tap((res) => {
-           this.handleUser(res);
-        }))
+            (
+                'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD_eEJpTYpTtjLzRX9b0eADeDcg3wLSKsM',
+                data
+            ).pipe(catchError(this.handleError), tap((res) => {
+                this.handleUser(res);
+            }))
     }
 
     login(email, password) {
         const data = { email: email, password: password, returnSecureToken: true }
         return this.http.post<AuthResponse>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD_eEJpTYpTtjLzRX9b0eADeDcg3wLSKsM',
             data
-        ).pipe(catchError(this.handleError),tap((res) => {
+        ).pipe(catchError(this.handleError), tap((res) => {
             this.handleUser(res);
         }));
     }
-    logout(){
+    logout() {
         this.user.next(null);
         this.router.navigate(['/login']);
+        localStorage.removeItem('user');
+
+        if(this.tokenExpireTimer){
+            clearTimeout(this.tokenExpireTimer );
+        }
+        this.tokenExpireTimer=null;
     }
-    autoLogin(){
+    autoLogout(expireTime:number){
+        this.tokenExpireTimer=setTimeout(() =>{
+        this.logout();
+        },expireTime);
+    }
+    autoLogin() {
         const user = JSON.parse(localStorage.getItem('user'));
-        if(!user){
+        if (!user) {
             return;
         }
-        const loggedUser = new User(user.email,user.id,user._token, user._expiresIn);
-        this.user.next(loggedUser);
-
-        if(loggedUser.token !=null){
+        const loggedUser = new User(user.email, user.id, user._token, user._expiresIn);
+        if (loggedUser.token != null) {
             this.user.next(loggedUser);
+            /// why expiresIn.gettime is not a function.see below
+            const timerValue=user._expiresIn.getTime - new Date().getTime();
+            this.autoLogout(timerValue);
         }
     }
-    // autoLogin() {
-    //     try {
-    //         const userJson = localStorage.getItem('user');
-    //         if (!userJson) {
-    //             return;
-    //         }
-    
-    //         const user = JSON.parse(userJson);
-    //         if (!user) {
-    //             return;
-    //         }
-    
-    //         const loggedUser = new User(user.email, user.id, user._Token, user._expiresIn);
-    //         if (loggedUser.token) {
-    //             this.user.next(loggedUser);
-    //         }
-    //     } catch (error) {
-    //         console.error('Failed to parse user data from localStorage', error);
-    //     }
-    // }
 
-    private handleUser(res){
+
+    private handleUser(res) {
         const expiresInTs = new Date().getTime() + +res.expiresIn * 1000;
         const expiresIn = new Date(expiresInTs);
-        const user = new User(res.email,res.localId,res.idToken,expiresIn);
+        const user = new User(res.email, res.localId, res.idToken, expiresIn);
         this.user.next(user);
+        this.autoLogout(res.expiresIn*1000);
 
-        localStorage.setItem('user',JSON.stringify(user));
-
-   
-}
+        localStorage.setItem('user', JSON.stringify(user));
+    }
 
     private handleError(err) {
         console.log(err);
