@@ -10,7 +10,7 @@ import { response } from "express";
 })
 export class AuthService {
     http: HttpClient = inject(HttpClient);
-    user = new Subject<User>();
+    user = new BehaviorSubject<User>(null);
 
     signup(email, password) {
         const data = { email: email, password: password, returnSecureToken: true }
@@ -40,6 +40,7 @@ export class AuthService {
     }
 
     private handleError(err) {
+        console.log(err);
         let errorMessage: string = "An unknown error occured";
         if (!err.error || !err.error.error) {
             return throwError(() => errorMessage);

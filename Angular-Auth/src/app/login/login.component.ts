@@ -5,6 +5,7 @@ import { AuthService } from '../Services/auth.service';
 import { error } from 'console';
 import { Observable } from 'rxjs';
 import { AuthResponse } from '../Models/AuthResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent {
   isLoading: boolean = false;
   errorMessage: string | null = null;
   authObs: Observable<AuthResponse>;
+  router : Router = inject(Router);
 
   OnSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -34,11 +36,12 @@ export class LoginComponent {
       this.authObs=this.authService.signup(email, password);
     }
     form.reset();
-    
+
     this.authObs.subscribe({
       next: (response) => {
         console.log(response);
         this.isLoading = false;
+        this.router.navigate(['/dashboard']);
       },
       error: (errMsg) => {
         console.log(errMsg);
