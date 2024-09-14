@@ -77,12 +77,13 @@ export class TaskService {
       });
   }
   GetAllTaskData() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    
     return this.http.get<{ [key: string]: Task }>(
       'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json'
     ).pipe(map((response) => {
         //transform Data
         let tasks = [];
-        console.log(response);
         for (let key in response) {
           if (response.hasOwnProperty(key)) {
             tasks.push({ ...response[key], id: key });

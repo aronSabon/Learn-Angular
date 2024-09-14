@@ -9,7 +9,7 @@ import { TaskService } from '../Services/task.service';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements OnInit,OnDestroy {
+export class DashboardComponent implements OnInit {
   showCreateTaskForm: boolean = false;
   showTaskDetails: boolean = false;
   // http: HttpClient = inject(HttpClient);
@@ -30,9 +30,9 @@ export class DashboardComponent implements OnInit,OnDestroy {
       this.setErrorMessage(httpError);
     }});
   }
-  ngOnDestroy(){
-    this.errorSubscription.unsubscribe();
-  }
+  // ngOnDestroy(){
+  //   this.errorSubscription.unsubscribe();
+  // }
 
   OpenCreateTaskForm() {
     this.showCreateTaskForm = true;

@@ -38,13 +38,49 @@ export class AuthService {
         this.user.next(null);
         this.router.navigate(['/login']);
     }
+    autoLogin(){
+        const user = JSON.parse(localStorage.getItem('user'));
+        if(!user){
+            return;
+        }
+        const loggedUser = new User(user.email,user.id,user._token, user._expiresIn);
+        this.user.next(loggedUser);
+
+        if(loggedUser.token !=null){
+            this.user.next(loggedUser);
+        }
+    }
+    // autoLogin() {
+    //     try {
+    //         const userJson = localStorage.getItem('user');
+    //         if (!userJson) {
+    //             return;
+    //         }
+    
+    //         const user = JSON.parse(userJson);
+    //         if (!user) {
+    //             return;
+    //         }
+    
+    //         const loggedUser = new User(user.email, user.id, user._Token, user._expiresIn);
+    //         if (loggedUser.token) {
+    //             this.user.next(loggedUser);
+    //         }
+    //     } catch (error) {
+    //         console.error('Failed to parse user data from localStorage', error);
+    //     }
+    // }
 
     private handleUser(res){
         const expiresInTs = new Date().getTime() + +res.expiresIn * 1000;
         const expiresIn = new Date(expiresInTs);
         const user = new User(res.email,res.localId,res.idToken,expiresIn);
         this.user.next(user);
-    }
+
+        localStorage.setItem('user',JSON.stringify(user));
+
+   
+}
 
     private handleError(err) {
         console.log(err);
