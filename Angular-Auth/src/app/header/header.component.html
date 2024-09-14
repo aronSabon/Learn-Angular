@@ -6,6 +6,6 @@
       <a href="/dashboard" *ngIf="isLoggedIn">DASHBOARD</a>
       <a href="/">HOME</a>
       <a href="/login" *ngIf="!isLoggedIn">LOGIN</a>
-      <a href="#" *ngIf="isLoggedIn">LOGOUT</a>
+      <a *ngIf="isLoggedIn" (click)="OnLogout()">LOGOUT</a>
   </div>
 </header>
