@@ -77,15 +77,9 @@ export class TaskService {
       });
   }
   GetAllTaskData() {
-    return this.authService.user.pipe(
-      take(1),
-      exhaustMap(user => {
-        return this.http.get<{ [key: string]: Task }>(
-          'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json',
-          {params:new HttpParams().set('auth' , user.token)}
-        )
-      }),
-      map((response) => {
+    return this.http.get<{ [key: string]: Task }>(
+      'https://angularhttpclient-ff30e-default-rtdb.firebaseio.com/tasks.json'
+    ).pipe(map((response) => {
         //transform Data
         let tasks = [];
         console.log(response);
