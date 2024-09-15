@@ -10,34 +10,27 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { CreateTaskComponent } from './dashboard/create-task/create-task.component';
-import { TaskDetailsComponent } from './dashboard/task-details/task-details.component';
-import { FormsModule } from '@angular/forms';
 import { RouteModule } from './route.module';
-import { LoaderComponent } from './utils/loader/loader.component';
 import { SnackbarComponent } from './utils/snackbar/snackbar.component';
+import { DashBoardModule } from './dashboard/dashboard.module';
+import { SharedModule } from './shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    DashboardComponent,
-    CreateTaskComponent,
-    TaskDetailsComponent,
+
     HomeComponent,
     LoginComponent,
-    LoaderComponent,
-    SnackbarComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
-    RouteModule
+    RouteModule,
+    DashBoardModule,
 
   ],
   providers: [
