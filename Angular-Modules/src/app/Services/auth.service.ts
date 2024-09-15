@@ -58,8 +58,7 @@ export class AuthService {
         const loggedUser = new User(user.email, user.id, user._token, user._expiresIn);
         if (loggedUser.token != null) {
             this.user.next(loggedUser);
-            /// why expiresIn.gettime is not a function.see below
-            const timerValue=user._expiresIn.getTime - new Date().getTime();
+            const timerValue=new Date(user._expiresIn).getTime() - new Date().getTime();
             this.autoLogout(timerValue);
         }
     }

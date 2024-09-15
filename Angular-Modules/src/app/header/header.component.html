@@ -3,9 +3,19 @@
       <h2>User Management</h2>
   </div>
   <div class="header-nav">
-      <a href="/dashboard" *ngIf="isLoggedIn">DASHBOARD</a>
-      <a href="/">HOME</a>
-      <a href="/login" *ngIf="!isLoggedIn">LOGIN</a>
+
+      <div class="dropdown" *ngIf="isLoggedIn">
+        <button class="dropbtn">Dashboard
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a routerLink="/dashboard/overview">Overview</a>
+          <a routerLink="/dashboard/stats">Stats</a>
+          <!-- <a routerLink="/dashobard/more">More Link</a> -->
+        </div>
+      </div>
+      <a routerLink="/">HOME</a>
+      <a routerLink="/login" *ngIf="!isLoggedIn">LOGIN</a>
       <a *ngIf="isLoggedIn" (click)="OnLogout()">LOGOUT</a>
   </div>
 </header>

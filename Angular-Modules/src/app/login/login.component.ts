@@ -41,7 +41,7 @@ export class LoginComponent {
       next: (response) => {
         console.log(response);
         this.isLoading = false;
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard/overview']);
       },
       error: (errMsg) => {
         console.log(errMsg);
