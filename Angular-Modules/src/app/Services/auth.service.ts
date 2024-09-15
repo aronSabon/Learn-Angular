@@ -6,9 +6,7 @@ import { User } from "../Models/User";
 import { response } from "express";
 import { Router } from "@angular/router";
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
     http: HttpClient = inject(HttpClient);
     user = new BehaviorSubject<User>(null);

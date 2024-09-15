@@ -14,6 +14,8 @@ import { RouteModule } from './route.module';
 import { SnackbarComponent } from './utils/snackbar/snackbar.component';
 import { DashBoardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared.module';
+import { AuthService } from './Services/auth.service';
+import { CoreModule } from './core.module';
 
 @NgModule({
   declarations: [
@@ -31,12 +33,11 @@ import { SharedModule } from './shared.module';
     HttpClientModule,
     RouteModule,
     DashBoardModule,
+    CoreModule
 
   ],
   providers: [
-    { provide:HTTP_INTERCEPTORS,useClass:AuthInterceptorService,multi:true},
-    { provide:HTTP_INTERCEPTORS,useClass:LoggingInterceptorService,multi:true},
-    provideClientHydration()
+   
   ],
   bootstrap: [AppComponent]
 })
