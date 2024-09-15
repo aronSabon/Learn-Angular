@@ -16,6 +16,7 @@ import { DashBoardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared.module';
 import { AuthService } from './Services/auth.service';
 import { CoreModule } from './core.module';
+import { AuthModule } from './login/auth.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,6 @@ import { CoreModule } from './core.module';
     FooterComponent,
 
     HomeComponent,
-    LoginComponent,
 
   ],
   imports: [
@@ -33,7 +33,8 @@ import { CoreModule } from './core.module';
     HttpClientModule,
     RouteModule,
     DashBoardModule,
-    CoreModule
+    CoreModule,
+    AuthModule
 
   ],
   providers: [
