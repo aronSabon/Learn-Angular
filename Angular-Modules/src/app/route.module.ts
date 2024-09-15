@@ -5,6 +5,8 @@ import { NgModule } from "@angular/core";
 
 const routes: Routes = [ 
     { path: '', component: HomeComponent }, 
+    { path: 'dashboard' , loadChildren: () => import('./dashboard/dashboard.module').then((mod) => mod.DashBoardModule)},
+    { path: 'login' , loadChildren: () => import('./login/auth.module').then((mod) => mod.AuthModule)},
    
   ]; 
 
