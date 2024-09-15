@@ -6,6 +6,7 @@ import { error } from 'console';
 import { Observable } from 'rxjs';
 import { AuthResponse } from '../Models/AuthResponse';
 import { Router } from '@angular/router';
+import { CounterService } from '../Services/counter.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,11 @@ export class LoginComponent {
   errorMessage: string | null = null;
   authObs: Observable<AuthResponse>;
   router : Router = inject(Router);
+countService:CounterService=inject(CounterService);
+
+ngOnInit(){
+  this.countService.increment('login component');
+}
 
   OnSwitchMode() {
     this.isLoginMode = !this.isLoginMode;

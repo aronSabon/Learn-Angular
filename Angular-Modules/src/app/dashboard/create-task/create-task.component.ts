@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Task } from '../../Models/Task';
+import { CounterService } from '../../Services/counter.service';
 
 @Component({
   selector: 'app-create-task',
@@ -15,6 +16,12 @@ export class CreateTaskComponent {
   @Input() editMode:boolean=false;
   @Input() selectedTask:Task;
   @ViewChild('taskForm') taskForm:NgForm;
+  countService:CounterService=inject(CounterService);
+
+  ngOnInit(){
+    this.countService.increment('createtask component');
+
+  }
 
   ngAfterViewInit(){
     setTimeout(() => {

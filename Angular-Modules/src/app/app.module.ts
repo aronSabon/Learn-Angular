@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { RouteModule } from './route.module';
 
 import { CoreModule } from './core.module';
+import { CounterService } from './Services/counter.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { CoreModule } from './core.module';
 
   ],
   providers: [
-   
+   CounterService
   ],
   bootstrap: [AppComponent]
 })
