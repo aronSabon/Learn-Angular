@@ -9,10 +9,10 @@ export class SignalsComponent {
   counter=signal(0);
   message:string[]=[];
   increment(){
-    this.counter
+    this.counter.set(this.counter()+1);
   }
   decrement(){
-    this.counter
+    this.counter.update((prevValue) => prevValue-1)
   }
 
 }
