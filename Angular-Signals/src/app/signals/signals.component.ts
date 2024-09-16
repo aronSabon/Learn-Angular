@@ -1,13 +1,19 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, DoCheck, effect, signal } from '@angular/core';
 
 @Component({
   selector: 'app-signals',
   templateUrl: './signals.component.html',
   styleUrl: './signals.component.css'
 })
-export class SignalsComponent {
+export class SignalsComponent implements DoCheck{
   counter=signal(0);
-  message=signal<string[]>([])
+  message=signal<string[]>([]);
+doubleCounter= computed(()=>this.counter() * 2);
+
+constructor(){
+  effect(() => console.log('new counter value is:'+ this.counter()))
+}
+
   increment(){
     // this.counter.set(this.counter()+1);
     this.counter.update((prevValue) => prevValue+1)
@@ -23,6 +29,9 @@ export class SignalsComponent {
       return updatedMessage;
     })
 
+  }
+  ngDoCheck(): void {
+    console.log('change detection called')
   }
 
 }
